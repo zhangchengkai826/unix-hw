@@ -1,0 +1,12 @@
+git config user.name "Chengkai Zhang"
+git config user.email "zchengkai826@gmail.com"
+git config color.ui "true"
+git config alias.st "status"
+git config alias.co "checkout"
+git config alias.ci "commit"
+git config alias.br "branch"
+git config alias.lg "log --graph --pretty=oneline --abbrev-commit"
+git config alias.lga "log --graph --author-date-order --decorate --oneline --simplify-by-decoration --all"
+git config alias.ada "add -A"
+git config core.autocrlf "false"
+

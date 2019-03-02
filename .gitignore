@@ -1,0 +1,9 @@
+data
+*.foo
+*.swp
+dos2unix
+*~
+ct2awk
+TEST
+*.out
+
