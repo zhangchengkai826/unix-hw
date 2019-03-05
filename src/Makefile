@@ -19,6 +19,5 @@ fig4-3.out: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)	
 
 .PHONY: clean
-
 clean:
 	rm -f $(ODIR)/* *~ core $(IDIR)/*~

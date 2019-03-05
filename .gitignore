@@ -6,4 +6,5 @@ dos2unix
 ct2awk
 TEST
 *.out
+*.o
 
