@@ -1,0 +1,18 @@
+[INSTALL]
+
+make
+
+
+[USAGE]
+
+./tcp <source> <destination>
+
+
+[TEST]
+
+Command:
+./testcp.sh -p ./tcp 
+
+Result:
+All 25 tests passed.
+

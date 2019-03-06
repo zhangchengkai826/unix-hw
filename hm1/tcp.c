@@ -14,29 +14,33 @@ int main(int argc, char *argv[]) {
     err_sys("open error");
   if(fstat(fd_s, &st_s) < 0)
     err_sys("fstat src error");
-  if(stat(argv[2], &st_d) < 0 || !S_ISDIR(st_d.st_mode)) { /* if dest path not exit or it's not a dir, then simply creat */
+  if(stat(argv[2], &st_d) < 0) { /* if dest does not exist */
     if((fd_d = creat(argv[2], st_s.st_mode)) < 0) 
-      err_sys("creat error");
-  } else {
+      err_sys("can't creat %s", argv[2]);
+  } else if(!S_ISDIR(st_d.st_mode)) { /* if dest exist and it's not a dir */
+    if(st_s.st_ino == st_d.st_ino) /* if src & dest are hard-linked */
+      err_quit("copy between hard links is not allowed");
+    if((fd_d = creat(argv[2], st_s.st_mode)) < 0) 
+      err_sys("can't creat %s", argv[2]);
+  } else { /* if dest exist and it's a dir */
     size_t sizep;
     char *npath = path_alloc(&sizep);
-    sprintf(npath, "%s/%s", argv[2], argv[1]); /* contruct new dest path */
+    char *src_no_ext = strrchr(argv[1], '/');
+    if(src_no_ext == NULL)
+      src_no_ext = argv[1];
+    else
+      src_no_ext += 1; /* remove leading '/' */
+    sprintf(npath, "%s/%s", argv[2], src_no_ext); /* contruct new dest path */
     if((fd_d = creat(npath, st_s.st_mode)) < 0) 
-      err_sys("creat error");
+      err_sys("can't creat %s", npath);
     free(npath);
   }
-  if(fstat(fd_d, &st_d) < 0)
-    err_sys("fstat dest error");
-  if(S_ISLNK(st_s.st_mode))
-    err_quit("copy symbolic link is not allowed");
-  if(S_ISLNK(st_dcopyst_mode))
-    err_quit("overwrite symbolic link is not allowed");
-  
 
-  while((n = read(fd_s, buf, BUFFSIZE)) > 0)
+  while((n = read(fd_s, buf, BUFFSIZE)) > 0) /* copy via read(2) & write(2) */
     if(write(fd_d, buf, n) != n)
       err_sys("write error");
   if(n < 0)
     err_sys("read error");
   exit(0);
 }
+

@@ -7,14 +7,20 @@ ODIR=obj
 _DEPS = common.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = common.o tcp.o
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+_OBJ_TCP = common.o tcp.o
+OBJ_TCP = $(patsubst %,$(ODIR)/%,$(_OBJ_TCP))
+
+_OBJ_TCPM = common.o tcpm.o
+OBJ_TCPM = $(patsubst %,$(ODIR)/%,$(_OBJ_TCPM))
 
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-tcp: $(OBJ) 
+tcp: $(OBJ_TCP) 
+	$(CC) -o $@ $^ $(CFLAGS)	
+
+tcpm: $(OBJ_TCPM) 
 	$(CC) -o $@ $^ $(CFLAGS)	
 
 .PHONY: clean
