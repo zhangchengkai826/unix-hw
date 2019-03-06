@@ -9,5 +9,6 @@ TEST
 *.o
 bar
 foo
-tcp*
+tcp
+tcpm
 
