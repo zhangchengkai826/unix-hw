@@ -1,0 +1,45 @@
+[INSTALL]
+
+make
+
+
+[USAGE]
+
+./tcp <source> <destination>
+
+
+[TEST]
+
+Command:
+./testcp.sh -p ./tcp 
+
+Result:
+All 25 tests passed.
+
+
+[CLEAN]
+
+make clean
+
+
+
+### bonus ###
+
+[INSTALL]
+
+make tcpm
+
+
+[USAGE]
+
+./tcpm <source> <destination>
+
+
+[TEST]
+
+Command:
+./testcp.sh -p ./tcpm
+
+Result:
+All 25 tests passed.
+
