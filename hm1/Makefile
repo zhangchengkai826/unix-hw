@@ -1,23 +1,23 @@
-IDIR=../include
+IDIR=./include
 CC=gcc
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) -ansi -g -Wall -Werror -Wextra -Wformat=2 -Wjump-misses-init -Wlogical-op -Wpedantic -Wshadow
 
 ODIR=obj
-LDIR=../lib
 
-_DEPS = apue.h
+_DEPS = common.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = apue.o fig4-16.o
+_OBJ = common.o tcp.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-fig4-16.out: $(OBJ) 
+tcp: $(OBJ) 
 	$(CC) -o $@ $^ $(CFLAGS)	
 
 .PHONY: clean
 clean:
 	rm -f $(ODIR)/* *~ core $(IDIR)/*~
+

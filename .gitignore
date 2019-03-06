@@ -7,4 +7,7 @@ ct2awk
 TEST
 *.out
 *.o
+bar
+foo
+tcp
 
