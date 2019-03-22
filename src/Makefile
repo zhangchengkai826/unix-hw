@@ -8,14 +8,14 @@ LDIR=../lib
 _DEPS = apue.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = apue.o fig4-16.o
+_OBJ = apue.o fig4-25.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-fig4-16.out: $(OBJ) 
+fig4-25.out: $(OBJ) 
 	$(CC) -o $@ $^ $(CFLAGS)	
 
 .PHONY: clean
